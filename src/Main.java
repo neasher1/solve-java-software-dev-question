@@ -10,7 +10,6 @@ public class Main {
 //		Check arguments
         if (args[0].equals("a")) {
             System.out.println("Loading data ...");
-
             try {
                 BufferedReader s = new BufferedReader(
                         new InputStreamReader(

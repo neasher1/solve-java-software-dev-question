@@ -7,9 +7,10 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
 
-//		Check arguments
         if (args[0].equals("a")) {
+
             System.out.println("Loading data ...");
+
             try {
                 BufferedReader s = new BufferedReader(
                         new InputStreamReader(
@@ -24,10 +25,15 @@ public class Main {
             catch (Exception e) {
 
             }
+
             System.out.println("Data Loaded.");
+
         }
+
         else if (args[0].equals("r")) {
+
             System.out.println("Loading data ...");
+
             try {
                 BufferedReader s = new BufferedReader(
                         new InputStreamReader(
@@ -39,16 +45,22 @@ public class Main {
                 int y = x.nextInt();
                 System.out.println(i[y]);
             }
+
             catch (Exception e) {
 
             }
+
             System.out.println("Data Loaded.");
+
         }
+
         else if (args[0].contains("+")) {
+
             System.out.println("Loading data ...");
+
             try {
                 BufferedWriter s = new BufferedWriter(
-                        new FileWriter("students.txt", true));
+                                        new FileWriter("students.txt", true));
                 String t = args[0].substring(1);
                 Date d = new Date();
                 String df = "dd/mm/yyyy-hh:mm:ss a";
@@ -57,13 +69,17 @@ public class Main {
                 s.write(", " + t + "\nList last updated on " + fd);
                 s.close();
             }
+
             catch (Exception e) {
 
             }
 
             System.out.println("Data Loaded.");
+
         }
+
         else if (args[0].contains("?")) {
+
             System.out.println("Loading data ...");
 
             try {
@@ -74,6 +90,7 @@ public class Main {
                 String[] i = r.split(",");
                 boolean done = false;
                 String t = args[0].substring(1);
+
                 for (int idx = 0; idx < i.length && !done; idx++) {
                     if (i[idx].equals(t)) {
                         System.out.println("We found it!");
@@ -81,12 +98,17 @@ public class Main {
                     }
                 }
             }
+
             catch (Exception e) {
 
             }
+
             System.out.println("Data Loaded.");
+
         }
+
         else if (args[0].contains("c")) {
+
             System.out.println("Loading data ...");
 
             try {
@@ -97,6 +119,7 @@ public class Main {
                 char[] a = D.toCharArray();
                 boolean in_word = false;
                 int count = 0;
+
                 for (char c : a) {
                     if (c == ' ') {
                         if (!in_word) {
@@ -108,11 +131,15 @@ public class Main {
                         }
                     }
                 }
+
                 System.out.println(count + " word(s) found " + a.length);
+
             }
+
             catch (Exception e) {
 
             }
+
             System.out.println("Data Loaded.");
         }
     }

@@ -4,25 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class Main {
-    public static void main(String[] args) {
 
-        if(args == null || args[0].length() != 1 || !args[0].equals("a")
-                && !args[0].equals("r") && !args[0].equals("?") && !args[0].equals("+") && !args[0].equals("c")){
+class Main {
+    public static void main(String[] args) throws IOException {
+//        args[0].length() != 1 || !args[0].equals("a")
+//                && !args[0].equals("r") && !args[0].equals("?") && !args[0].equals("+") && !args[0].equals("c")
+
+        if(args == null || args.length!=1){
             System.out.println("Please provide a, r, ?, + or c as argument");
             return;
         }
+
+        //Every operation requires us to load the student list.
+        String fileContents = LoadData("students.txt");
 
         if (args[0].equals("a")) {
 
             System.out.println("Loading data ...");
 
             try {
-                BufferedReader fileStream = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String reader = fileStream.readLine();
-                String[] words = reader.split(",");
+                String[] words = fileContents.split(",");
 
                 for (String word : words) {
                     System.out.println(word);
@@ -43,12 +44,7 @@ public class Main {
             System.out.println("Loading data ...");
 
             try {
-                BufferedReader fileStream = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String reader = fileStream.readLine();
-                System.out.println(reader);
-                String[] words = reader.split(",");
+                String[] words = fileContents.split(",");
                 Random random = new Random();
                 int randomIndex = random.nextInt();
                 System.out.println(words[randomIndex]);
@@ -91,11 +87,7 @@ public class Main {
             System.out.println("Loading data ...");
 
             try {
-                BufferedReader fileStream = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String reader = fileStream.readLine();
-                String[] words = reader.split(",");
+                String[] words = fileContents.split(",");
                 boolean done = false;
                 String argValue = args[0].substring(1);
 
@@ -122,11 +114,7 @@ public class Main {
             System.out.println("Loading data ...");
 
             try {
-                BufferedReader fileStream = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String reader = fileStream.readLine();
-                char[] characters = reader.toCharArray();
+                char[] characters = fileContents.toCharArray();
                 boolean in_word = false;
                 int count = 0;
 
@@ -153,6 +141,24 @@ public class Main {
 
             System.out.println("Data Loaded.");
         }
-
+    }
+    public static String LoadData(String fileName) {
+        BufferedReader fileStream = null;
+        try {
+            fileStream = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream("students.txt")));
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String reader = null;
+        try {
+            reader = fileStream.readLine();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return reader;
     }
 }

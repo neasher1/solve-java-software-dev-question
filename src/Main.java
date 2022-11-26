@@ -11,7 +11,7 @@ class Main {
         Constants obj = new Constants();
 
         if (args == null || args.length != 1) {
-            System.out.println("Please provide a, r, ?, + or c as argument");
+            ShowUsage();
             return;
         }
 
@@ -118,6 +118,10 @@ class Main {
 
             System.out.println("Data Loaded.");
         }
+
+        else {
+            ShowUsage();
+        }
     }
 
     public static String LoadData(String fileName) {
@@ -140,5 +144,9 @@ class Main {
             throw new RuntimeException(e);
         }
         return reader;
+    }
+
+    static void ShowUsage() {
+        System.out.println("Please provide a, r, ?, + or c as argument");
     }
 }

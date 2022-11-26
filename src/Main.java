@@ -87,16 +87,21 @@ class Main {
             System.out.println("Loading data ...");
 
             String[] words = fileContents.split(obj.StudentEntryDelimiter);
-            boolean done = false;
             String argValue = args[0].substring(1);
+            int indexLocation = -1;
 
-            for (int idx = 0; idx < words.length && !done; idx++) {
-
-                if (words[idx].equals(argValue)) {
-                    System.out.println("We found it!");
-                    done = true;
+            for (int idx = 0; idx < words.length; idx++) {
+                if (words[idx].trim().equals(argValue)) {
+                    indexLocation = idx;
+                    break;
                 }
+            }
 
+            if (indexLocation >= 0) {
+                System.out.println(String.format("ArgValue =  %s is exist, We found it", argValue));
+            } else {
+
+                System.out.println(String.format("ArgValue =  %s is not exist, Not Found", argValue));
             }
 
             System.out.println("Data Loaded.");

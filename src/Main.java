@@ -18,6 +18,7 @@ class Main {
         // Every operation requires us to load the student list.
         String fileContents = LoadData(Constants.StudentList);
 
+        // matches the arguments of a
         if (args[0].equals(obj.ShowAll)) {
 
             System.out.println("Loading data ...");
@@ -39,6 +40,7 @@ class Main {
 
         }
 
+        // identical random numbers.
         else if (args[0].equals(obj.ShowRandom)) {
 
             System.out.println("Loading data ...");
@@ -58,6 +60,7 @@ class Main {
 
         }
 
+        // add another student
         else if (args[0].contains(obj.AddEntry)) {
 
             System.out.println("Loading data ...");
@@ -82,6 +85,7 @@ class Main {
 
         }
 
+        // find student name from file
         else if (args[0].contains(obj.FindEntry)) {
 
             System.out.println("Loading data ...");
@@ -109,6 +113,7 @@ class Main {
 
         }
 
+        // find words in a file
         else if (args[0].contains(obj.ShowCount)) {
 
             System.out.println("Loading data ...");
@@ -129,6 +134,7 @@ class Main {
         // create a object for constant class
         Constants obj = new Constants();
 
+        // Reads data from the given file.
         BufferedReader fileStream = null;
         try {
             fileStream = new BufferedReader(

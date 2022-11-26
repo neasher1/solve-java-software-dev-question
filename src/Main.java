@@ -4,26 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-
 class Main {
     public static void main(String[] args) throws IOException {
-//        args[0].length() != 1 || !args[0].equals("a")
-//                && !args[0].equals("r") && !args[0].equals("?") && !args[0].equals("+") && !args[0].equals("c")
 
-        if(args == null || args.length!=1){
+        // create a object for constant class
+        Constants obj = new Constants();
+
+        if (args == null || args.length != 1) {
             System.out.println("Please provide a, r, ?, + or c as argument");
             return;
         }
 
-        //Every operation requires us to load the student list.
-        String fileContents = LoadData("students.txt");
+        // Every operation requires us to load the student list.
+        String fileContents = LoadData(Constants.StudentList);
 
-        if (args[0].equals("a")) {
+        if (args[0].equals(obj.ShowAll)) {
 
             System.out.println("Loading data ...");
 
             try {
-                String[] words = fileContents.split(",");
+                String[] words = fileContents.split(obj.StudentEntryDelimiter);
 
                 for (String word : words) {
                     System.out.println(word);
@@ -39,14 +39,14 @@ class Main {
 
         }
 
-        else if (args[0].equals("r")) {
+        else if (args[0].equals(obj.ShowRandom)) {
 
             System.out.println("Loading data ...");
 
             try {
-                String[] words = fileContents.split(",");
+                String[] words = fileContents.split(obj.StudentEntryDelimiter);
                 Random random = new Random();
-                int randomIndex = random.nextInt();
+                int randomIndex = random.nextInt(0, words.length);
                 System.out.println(words[randomIndex]);
             }
 
@@ -58,7 +58,7 @@ class Main {
 
         }
 
-        else if (args[0].contains("+")) {
+        else if (args[0].contains(obj.AddEntry)) {
 
             System.out.println("Loading data ...");
 
@@ -82,26 +82,20 @@ class Main {
 
         }
 
-        else if (args[0].contains("?")) {
+        else if (args[0].contains(obj.FindEntry)) {
 
             System.out.println("Loading data ...");
 
-            try {
-                String[] words = fileContents.split(",");
-                boolean done = false;
-                String argValue = args[0].substring(1);
+            String[] words = fileContents.split(obj.StudentEntryDelimiter);
+            boolean done = false;
+            String argValue = args[0].substring(1);
 
-                for (int idx = 0; idx < words.length && !done; idx++) {
+            for (int idx = 0; idx < words.length && !done; idx++) {
 
-                    if (words[idx].equals(argValue)) {
-                        System.out.println("We found it!");
-                        done = true;
-                    }
-
+                if (words[idx].equals(argValue)) {
+                    System.out.println("We found it!");
+                    done = true;
                 }
-            }
-
-            catch (Exception e) {
 
             }
 
@@ -109,7 +103,7 @@ class Main {
 
         }
 
-        else if (args[0].contains("c")) {
+        else if (args[0].contains(obj.ShowCount)) {
 
             System.out.println("Loading data ...");
 
@@ -142,21 +136,24 @@ class Main {
             System.out.println("Data Loaded.");
         }
     }
+
     public static String LoadData(String fileName) {
+
+        // create a object for constant class
+        Constants obj = new Constants();
+
         BufferedReader fileStream = null;
         try {
             fileStream = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream("students.txt")));
-        }
-        catch (FileNotFoundException e) {
+                            new FileInputStream(Constants.StudentList)));
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         String reader = null;
         try {
             reader = fileStream.readLine();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return reader;
